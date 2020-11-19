@@ -1,0 +1,13 @@
+{{> header }}
+
+{{ #if this }}
+    {{ #each this }}
+        <div class="post" style="width: 420px">
+            <h2>{{ this.name }}</h4>
+            <p>{{ this.comment }}</p>
+        </div>
+        <br>
+    {{ /each }}
+{{ else }}
+    <p>no posts today</p>
+{{ /if }}
