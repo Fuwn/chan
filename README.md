@@ -1,5 +1,9 @@
 # chan
-A simple "chan"-like board written in Rust. 
+A simple "chan"-like board written in Rust.
+
+[![GitHub Issues](https://img.shields.io/github/issues-raw/fuwn/chan.svg)](https://github.com/fuwn/chan/issues)
+[![License](https://img.shields.io/github/license/fuwn/chan.svg)](LICENSE)
+![GitHub Stars](https://img.shields.io/github/stars/fuwn/chan?style=social)
 
 ```
 ⣿⣿⣷⡁⢆⠈⠕⢕⢂⢕⢂⢕⢂⢔⢂⢕⢄⠂⣂⠂⠆⢂⢕⢂⢕⢂⢕⢂⢕⢂
