@@ -1,13 +1,57 @@
+<title>chan - /{{ this.0.board }}/</title>
+
 {{> header }}
+
+<form action="/api/v1/post" method="post">
+    <div class="form-group">
+        <label for="name">Name <span class="badge badge-info">Optional</span></label>
+        <input class="form-control" name="name" type="text"
+            placeholder="Anonymous">
+    </div>
+
+    <div class="form-group">
+        <label for="comment">Comment <span class="badge badge-warning">Required</span></label>
+        <textarea class="form-control" name="comment" cols="48" rows="4"
+            wrap="soft" placeholder="comment" required></textarea>
+    </div>
+
+    <div class="form-group form-check">
+        <input class="form-check-input" type="checkbox" disabled>
+        <label class="form-check-label">I'm not a robot. <span class="badge badge-warning">Required</span> <span class="badge badge-danger">Disabled</span></label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-label">Image <span class="badge badge-info">Optional</span> <span class="badge badge-danger">Disabled</span></label>
+        <input class="form-control-file" type="file" disabled>
+    </div>
+
+    <input type="hidden" name="board" value="{{ this.0.board }}">
+
+    <button type="submit" class="btn btn-primary">Post</button>
+</form>
+<br>
+
+<hr>
 
 {{ #if this }}
     {{ #each this }}
-        <div class="post" style="width: 420px">
+        <!-- <div class="post" style="width: 420px">
             <h2>{{ this.name }}</h4>
             <p>{{ this.comment }}</p>
+        </div> -->
+
+        <div class="card">
+            <div class="card-body">
+                <h2>{{ this.name }}</h4>
+                <p>{{ this.comment }}</p>
+
+                <button class="btn btn-primary" disabled>View thread</button>
+            </div>
         </div>
         <br>
     {{ /each }}
 {{ else }}
-    <p>no posts today</p>
+    <div class="alert alert-primary" role="alert">
+        No posts have been made today!
+    </div>
 {{ /if }}
