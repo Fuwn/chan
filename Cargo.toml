@@ -1,0 +1,21 @@
+[package]
+name = "chan"
+version = "0.1.0"
+authors = ["Fuwn <contact@fuwn.me>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rocket = "0.4.6"
+serde = "1.0.117"
+serde_json = "1.0.59"
+serde_derive = "1.0.117"
+
+[dependencies.rocket_contrib]
+version = "0.4.6"
+features = ["handlebars_templates"]
+
+[dependencies.rusqlite]
+version = "0.24.1"
+features = ["bundled"]
