@@ -31,5 +31,8 @@ Pre-built binaries *might* be available in the future if there is enough demand 
 ## Contribution
 Feel free to make pull requests or open issues if you think a feature should be added or you find a bug, or just anything --- within reason.
 
+### Notes
+Ignore my messy Handlebars templates, I didn't really have a purpose to make them fancy or whatever because of the simplicity of the project.
+
 ### License
 [GNU Affero General Public License v3.0](https://github.com/fuwn/chan/blob/main/LICENSE.md)
