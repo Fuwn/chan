@@ -1,11 +1,6 @@
 use rusqlite::{params, Connection, Result, Error as SQLError};
 
-/// The format a valid SQLlite thread entry should have.
-#[derive(FromForm, Debug, Serialize, Deserialize)]
-pub struct Thread {
-    pub name: String,
-    pub comment: String
-}
+use crate::structures::*;
 
 /// Create a new thread in the SQLite database.
 pub fn new_thread(mut thread: Thread) -> Result<()> {
@@ -14,29 +9,65 @@ pub fn new_thread(mut thread: Thread) -> Result<()> {
 
     // If the name field in the POST request is empty, user should be "anonymous".
     if thread.name == "" {
-        thread.name = "anonymous".to_owned();
+        thread.name = "Anonymous".to_owned();
     }
 
     // Add thread entry to database.
     db.execute(
-        "INSERT INTO thread (name, comment) VALUES (?1, ?2)",
-        params![thread.name, thread.comment]
+        "INSERT INTO threads (board, name, comment) VALUES (?1, ?2, ?3)",
+        params![thread.board, thread.name, thread.comment]
     )?;
 
     Ok(())
 }
 
 /// Get all threads from the SQLite databse.
-pub fn get_threads() -> Result<Vec<Thread>, SQLError> {
+pub fn _get_all_threads() -> Result<Vec<Thread>, SQLError> {
     // Open SQLite database file.
     let db = Connection::open("chan.db")?;
 
     // Get all entries from the thread table.
-    let mut statement = db.prepare("SELECT name, comment FROM thread")?;
+    let mut statement = db.prepare("SELECT board, name, comment FROM threads")?;
     let threads = statement.query_map(params![], |row| {
         Ok(Thread {
-            name: row.get(0)?,
-            comment: row.get(1)?
+            board: row.get(0)?,
+            name: row.get(1)?,
+            comment: row.get(2)?
+        })
+    })?;
+    threads.collect()
+}
+
+/// Get all boards from the SQLite databse.
+pub fn get_boards() -> Result<Vec<Board>, SQLError> {
+    // Open SQLite database file.
+    let db = Connection::open("chan.db")?;
+
+    // Get all entries from the thread table.
+    let mut statement = db.prepare("SELECT tag, name, nsfw, disabled FROM boards")?;
+    let boards = statement.query_map(params![], |row| {
+        Ok(Board {
+            tag: row.get(0)?,
+            name: row.get(1)?,
+            nsfw: row.get(2)?,
+            disabled: row.get(3)?
+        })
+    })?;
+    boards.collect()
+}
+
+/// Get all threads from a specific board within the SQLite databse.
+pub fn get_threads(board: String) -> Result<Vec<Thread>, SQLError> {
+    // Open SQLite database file.
+    let db = Connection::open("chan.db")?;
+
+    // Get all entries from the thread table.
+    let mut statement = db.prepare("SELECT board, name, comment FROM threads WHERE board = (?)")?;
+    let threads = statement.query_map(params![board], |row| {
+        Ok(Thread {
+            board: row.get(0)?,
+            name: row.get(1)?,
+            comment: row.get(2)?
         })
     })?;
     threads.collect()
