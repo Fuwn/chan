@@ -25,6 +25,11 @@ A simple "chan"-like board written in Rust.
 ## Inspirational
 Originally, this project was supposed to be a public [OpenPGP](https://www.openpgp.org/) key server because I was frustrated with the current selection of key servers, but I randomly had the idea to make a "chan"-like forum and I had this sitting around so I made this!
 
+## Limitations
+At the moment, the board is missing automatic post pruning, moderation features, and an actual working implementation of boards, but I have plans to finish adding them in the near future.
+
+Ignore my messy Handlebars templates, I didn't really have a purpose to make them fancy or whatever because of the simplicity of the project.
+
 ## Usage
 1. Install [Rust](https://www.rust-lang.org/).
 2. Clone the repository.
@@ -34,9 +39,6 @@ Pre-built binaries *might* be available in the future if there is enough demand 
 
 ## Contribution
 Feel free to make pull requests or open issues if you think a feature should be added or you find a bug, or just anything --- within reason.
-
-### Notes
-Ignore my messy Handlebars templates, I didn't really have a purpose to make them fancy or whatever because of the simplicity of the project.
 
 ### License
 [GNU Affero General Public License v3.0](https://github.com/fuwn/chan/blob/main/LICENSE.md)
