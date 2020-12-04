@@ -11,6 +11,7 @@ rocket = "0.4.6"
 serde = "1.0.117"
 serde_json = "1.0.59"
 serde_derive = "1.0.117"
+actix-web = "3"
 
 [dependencies.rocket_contrib]
 version = "0.4.6"
@@ -19,3 +20,15 @@ features = ["handlebars_templates"]
 [dependencies.rusqlite]
 version = "0.24.1"
 features = ["bundled"]
+
+[dependencies.yarte]
+version = "0.8"
+features = ["html-min"]
+
+[build-dependencies.yarte_helpers]
+version = "0.8"
+default-features = false
+features = ["config"]
+
+[dev-dependencies]
+actix-rt = "1"

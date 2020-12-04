@@ -1,0 +1,18 @@
+{{#> ../base title = "Boards | chan" }}
+    <h1>Boards</h1>
+
+    <div class="col"></div>
+    <div class="col">
+        <ul>
+        <p><ul>Unorganized Boards</ul></p>
+        {{! {{ #each this }}
+            <li>
+                <a href="/board/{{ this.tag }}">{{ this.name }} <span class="badge badge-primary">New!</span> {{ #if this.nsfw }} <span class="badge badge-danger">NSFW!</span> {{ /if }}</p>
+            </li>
+        {{ ~/each }} !}}
+
+        {{ threads }}
+        </ul>
+    </div>
+    <div class="col"></div>
+{{/../base }}
