@@ -1,0 +1,6 @@
+[main]
+dir = "templates"
+
+[partials]
+alias = "./deep/more/deep"
+doc = "./deep/more/doc"
