@@ -1,4 +1,4 @@
-/// The format a valid SQLlite thread entry should have.
+/// The format a valid SQLite thread entry should have.
 #[derive(FromForm, Debug, Serialize, Deserialize)]
 pub struct Thread {
 	pub board: String,
@@ -6,7 +6,7 @@ pub struct Thread {
 	pub comment: String
 }
 
-/// The format a valid SQLlite thread entry should have.
+/// The format a valid SQLite thread entry should have.
 #[derive(FromForm, Debug, Serialize, Deserialize, PartialEq)]
 pub struct Board {
 	pub tag: String,
