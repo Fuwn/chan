@@ -7,7 +7,7 @@ pub fn new_thread(mut thread: Thread) -> Result<()> {
 	// Open SQLite database file.
 	let db = Connection::open("chan.db")?;
 
-	// If the name field in the POST request is empty, user should be "anonymous".
+	// If the name field in the POST request is empty, user's name should be "anonymous".
 	if thread.name == "" {
 		thread.name = "Anonymous".to_owned();
 	}
@@ -21,54 +21,51 @@ pub fn new_thread(mut thread: Thread) -> Result<()> {
 	Ok(())
 }
 
-/// Get all threads from the SQLite databse.
+/// Get all threads from the SQLite database.
 pub fn _get_all_threads() -> Result<Vec<Thread>, SQLError> {
 	// Open SQLite database file.
 	let db = Connection::open("chan.db")?;
 
 	// Get all entries from the thread table.
 	let mut statement = db.prepare("SELECT board, name, comment FROM threads")?;
-	let threads = statement.query_map(params![], |row| {
+	statement.query_map(params![], |row| {
 		Ok(Thread {
 			board: row.get(0)?,
 			name: row.get(1)?,
 			comment: row.get(2)?
 		})
-	})?;
-	threads.collect()
+	})?.collect()
 }
 
-/// Get all boards from the SQLite databse.
+/// Get all boards from the SQLite database.
 pub fn get_boards() -> Result<Vec<Board>, SQLError> {
 	// Open SQLite database file.
 	let db = Connection::open("chan.db")?;
 
 	// Get all entries from the thread table.
 	let mut statement = db.prepare("SELECT tag, name, nsfw, disabled FROM boards")?;
-	let boards = statement.query_map(params![], |row| {
+	statement.query_map(params![], |row| {
 		Ok(Board {
 			tag: row.get(0)?,
 			name: row.get(1)?,
 			nsfw: row.get(2)?,
 			disabled: row.get(3)?
 		})
-	})?;
-	boards.collect()
+	})?.collect()
 }
 
-/// Get all threads from a specific board within the SQLite databse.
+/// Get all threads from a specific board within the SQLite database.
 pub fn get_threads(board: String) -> Result<Vec<Thread>, SQLError> {
 	// Open SQLite database file.
 	let db = Connection::open("chan.db")?;
 
 	// Get all entries from the thread table.
 	let mut statement = db.prepare("SELECT board, name, comment FROM threads WHERE board = (?)")?;
-	let threads = statement.query_map(params![board], |row| {
+	statement.query_map(params![board], |row| {
 		Ok(Thread {
 			board: row.get(0)?,
 			name: row.get(1)?,
 			comment: row.get(2)?
 		})
-	})?;
-	threads.collect()
+	})?.collect()
 }
