@@ -42,6 +42,12 @@ because of the simplicity of the project.
 3. Rename the [`chan.db.example`](./chan.db.example) file to `chan.db`.
 4. `$ cargo run`.
 
+### Adding boards
+To add boards, open the example database in a SQLite viewer add a board entry to the 'boards' table
+(examples provided in database).
+
+Pre-built binaries *might* be available in the future if there is enough demand for them.
+
 ### Usage Notes
 [`chan.db.example`](./chan.db.example) is the default format of the database. If you ever want to
 "restore" the database to its default state, I recommend you keep a copy of the original state of
@@ -49,12 +55,6 @@ this file.
 
 In the future, I will *most likely* add a `setup_db()` function to validate the database state and
 properly setup the database when an invalid format is found.
-
-### Adding boards
-To add boards, open the example database in a SQLite viewer add a board entry to the 'boards' table
-(examples provided in database).
-
-Pre-built binaries *might* be available in the future if there is enough demand for them.
 
 ## Contribution
 Feel free to make pull requests or open issues if you think a feature should be added or you find a
