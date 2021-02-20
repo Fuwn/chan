@@ -28,13 +28,14 @@ pub fn _get_all_threads() -> Result<Vec<Thread>, SQLError> {
 
 	// Get all entries from the thread table.
 	let mut statement = db.prepare("SELECT board, name, comment FROM threads")?;
-	statement.query_map(params![], |row| {
+	let threads = statement.query_map(params![], |row| {
 		Ok(Thread {
 			board: row.get(0)?,
 			name: row.get(1)?,
 			comment: row.get(2)?
 		})
-	})?.collect()
+	})?;
+	threads.collect()
 }
 
 /// Get all boards from the SQLite database.
@@ -44,14 +45,15 @@ pub fn get_boards() -> Result<Vec<Board>, SQLError> {
 
 	// Get all entries from the thread table.
 	let mut statement = db.prepare("SELECT tag, name, nsfw, disabled FROM boards")?;
-	statement.query_map(params![], |row| {
+	let boards = statement.query_map(params![], |row| {
 		Ok(Board {
 			tag: row.get(0)?,
 			name: row.get(1)?,
 			nsfw: row.get(2)?,
 			disabled: row.get(3)?
 		})
-	})?.collect()
+	})?;
+	boards.collect()
 }
 
 /// Get all threads from a specific board within the SQLite database.
@@ -61,11 +63,12 @@ pub fn get_threads(board: String) -> Result<Vec<Thread>, SQLError> {
 
 	// Get all entries from the thread table.
 	let mut statement = db.prepare("SELECT board, name, comment FROM threads WHERE board = (?)")?;
-	statement.query_map(params![board], |row| {
+	let threads = statement.query_map(params![board], |row| {
 		Ok(Thread {
 			board: row.get(0)?,
 			name: row.get(1)?,
 			comment: row.get(2)?
 		})
-	})?.collect()
+	})?;
+	threads.collect()
 }
