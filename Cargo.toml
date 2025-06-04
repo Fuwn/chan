@@ -7,15 +7,15 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rocket = "0.4.6"
-serde = "1.0.117"
-serde_json = "1.0.59"
-serde_derive = "1.0.117"
+rocket = "0.4.11"
+serde = "1.0.219"
+serde_json = "1.0.140"
+serde_derive = "1.0.219"
 
 [dependencies.rocket_contrib]
-version = "0.4.6"
+version = "0.4.11"
 features = ["handlebars_templates"]
 
 [dependencies.rusqlite]
-version = "0.24.1"
+version = "0.24.2"
 features = ["bundled"]
